@@ -92,7 +92,9 @@ Follow these simple steps to get started with Word Wizards:
    Unix\Mac: <br />
    `cp .env.example .env`
    
-   Then, open the `.env` file and replace `your_api_key_here` with your actual WordsAPI key.
+   Then, open the `.env` file and replace `your_api_key_here` with your actual WordsAPI key. For example:
+
+   WORDS_API_KEY = 'ABCDE'
 
 11. In the project directory, start the server: <br />
    `python manage.py runserver`
