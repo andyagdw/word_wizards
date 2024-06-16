@@ -85,13 +85,19 @@ Follow these simple steps to get started with Words Wizards:
 8. Ensure project dependencies are installed: <br />
    ```pip install -r requirements.txt```
 
-9. Create a `.env` file in the project directory and add your WordsAPI key that you copied earlier on <br />
+9. Create a `.env` file from the example template `.env.example`
+
+   Windows: <br />
+   `copy .env.example .env` <br />
+   Unix\Mac: <br />
+   `cp .env.example .env`
+   
    Then, open the `.env` file and replace `your_api_key_here` with your actual WordsAPI key.
 
-10. In the project directory, start the server: <br />
+11. In the project directory, start the server: <br />
    `python manage.py runserver`
 
-11. Click the link that shows in the terminal!
+12. Click the link that shows in the terminal!
 
 ## Upcoming Features 🎆
 
