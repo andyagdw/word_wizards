@@ -35,7 +35,7 @@ and enjoy the interface in any lighting condition 😄.
 
 Follow these simple steps to get started with Word Wizards:
 
-1. Create an Account with RapidAPI:
+1. Create a free account with RapidAPI:
 * Go to the [WordsAPI RapidAPI page](https://rapidapi.com/dpventures/api/wordsapi/pricing).
 * Sign up for a free basic plan, which provides access to 2,500 requests per day.
 * After subscribing to the WordsAPI, you should be redirected to a page where you can view your X-RapidAPI-Key.
