@@ -1,34 +1,33 @@
-# Words Wizards
+# Words Wizards ⚡
 
-A dynamic Django-based web application that brings the magic of words to your fingertips.
+A dynamic Django-based web application that brings the magic of words to your fingertips👐.
 Whether you're a word enthusiast, a student, or simply someone who loves to expand their
 vocabulary, Words Wizards provides a delightful experience with a variety of word-related
-features. Leveraging the power of the WordsAPI, the platform offers users the ability to
+features. Leveraging the power of the [WordsAPI](https://www.wordsapi.com/), the platform offers users the ability to
 explore the word of the day, discover random words, and curate a personalised list of
 favourite words. Additionally, users can upgrade their accounts to access enhanced features
-and enjoy a richer experience.
+and enjoy a richer experience free of cost ❗.
 
-## Features
+## Features 💥
 
-* Word of the Day: <br /> Stay inspired and learn something new every day with the 'Word of the Day'
+* **Word of the Day**: <br /> Stay inspired and learn something new every day with the 'Word of the Day'
  feature, providing you with a fresh word and its details daily.
-* Random Word: <br /> Discover new words at random and expand your vocabulary with just a click.
-* Favourites: <br /> Keep track of the words you love by adding them to your favourites list for easy
- access
-and review.
-* Account Upgrades: Upgrade your account to unlock 'Plus' or 'Pro' features, enhancing your word
+* **Random Word**: <br /> Discover new words at random and expand your vocabulary with just a click.
+* **Favourites**: <br /> Keep track of the words you love by adding them to your favourites list for easy
+ access and review.
+* **Account Upgrades**: <br /> Upgrade your account to unlock 'Plus' or 'Pro' features, enhancing your word
  discovery experience with additional functionalities.
 
 ## Getting started ✅
 
 Follow these simple steps to get started with Words Wizards:
 
-1. Ensure you have Python and Pip installed on your machine. <br />
-2. Clone the repository to your local machine <br />
-   `git clone `
-3. Navigate to the project directory <br />
-   `cd `
-4. Open Visual Studio Code <br />
+1. Ensure you have Python and Pip installed on your local machine. <br />
+2. Clone the repository to your local machine: <br />
+   `git clone https://github.com/andyagdw/words_wizards.git`
+3. Navigate to the project directory: <br />
+   `cd words_wizards`
+4. Open Visual Studio Code: <br />
    `code .`
 5. Set up a virtual environment in Visual Studio Code terminal. <br />
    Make sure you are in the project directory.
@@ -63,23 +62,22 @@ Follow these simple steps to get started with Words Wizards:
    `source venv/bin/activate`
 
 7. Ensure project dependencies are installed: <br />
-
-```pip install -r requirements.txt```
-
+   ```pip install -r requirements.txt```
+   
 8. In the project directory, start the server: <br />
    `python manage.py runserver`
 
 9. Click the link that shows in the terminal!
 
-## Upcoming Features
+## Upcoming Features 🎆
 
 1. **Interactive Games**: <br /> Add a variety of word-related games, including both single-player and
- multiplayer options, to make learning new words fun and engaging.
+ multiplayer options, to make learning new words fun and engaging 😁.
 2. **Personal Vocabulary Notes**: <br /> Introduce a feature that allows users to add personal notes and insights
- about words, creating a personalised vocabulary journal.
+ about words, creating a personalised vocabulary journal 📖.
 
 ## Credits
 ### Contact
 
 If you have any questions or just want to connect, you can reach me on
-[LinkedIn](https://www.linkedin.com/in/andyagyeidwumah/)
+[LinkedIn](https://www.linkedin.com/in/andyagyeidwumah/) 👍.
