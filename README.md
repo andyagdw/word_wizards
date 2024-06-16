@@ -1,8 +1,8 @@
-# Words Wizards ⚡
+# Word Wizards ⚡
 
 A dynamic Django-based web application that brings the magic of words to your fingertips👐.
 Whether you're a word enthusiast, a student, or simply someone who loves to expand their
-vocabulary, Words Wizards provides a delightful experience with a variety of word-related
+vocabulary, Word Wizards provides a delightful experience with a variety of word-related
 features. Leveraging the power of the [WordsAPI](https://www.wordsapi.com/), the platform offers users the ability to
 explore the word of the day, discover random words, and curate a personalised list of
 favourite words. Additionally, users can upgrade their accounts to access enhanced features
@@ -20,7 +20,7 @@ and enjoy a richer experience free of cost ❗.
 
 ## Light and Dark Mode 🌓
 
-Words Wizards offers a seamless experience with both light and dark modes. Choose the theme that suits your preference
+Word Wizards offers a seamless experience with both light and dark modes. Choose the theme that suits your preference
 and enjoy the interface in any lighting condition 😄.
 
 ### Light Mode (Plus account)
@@ -33,9 +33,9 @@ and enjoy the interface in any lighting condition 😄.
 
 ## Getting started ✅
 
-Follow these simple steps to get started with Words Wizards:
+Follow these simple steps to get started with Word Wizards:
 
-1. Create an Account with RapidAPI:
+1. Create a free account with RapidAPI:
 * Go to the [WordsAPI RapidAPI page](https://rapidapi.com/dpventures/api/wordsapi/pricing).
 * Sign up for a free basic plan, which provides access to 2,500 requests per day.
 * After subscribing to the WordsAPI, you should be redirected to a page where you can view your X-RapidAPI-Key.
@@ -45,9 +45,9 @@ Follow these simple steps to get started with Words Wizards:
 
 2. Ensure you have Python and Pip installed on your local machine. <br />
 3. Clone the repository to your local machine: <br />
-   `git clone https://github.com/andyagdw/words_wizards.git`
+   `git clone https://github.com/andyagdw/word_wizards.git`
 4. Navigate to the project directory: <br />
-   `cd words_wizards`
+   `cd word_wizards`
 5. Open Visual Studio Code: <br />
    `code .`
 6. Set up a virtual environment in Visual Studio Code terminal. <br />
