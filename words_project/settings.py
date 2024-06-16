@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
-# from decouple import config
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -44,15 +43,7 @@ INSTALLED_APPS = [
     'words_app',  # Install words_app
     'authenticate',  # Install authenticate app
     'widget_tweaks',  # Tweak the form field rendering in templates
-    'django_icons',
 ]
-
-# Define icon
-DJANGO_ICONS = {
-    "ICONS": {
-        "search": {"name": "fa-solid fa-magnifying-glass"},
-    },
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -146,7 +137,6 @@ LOGIN_URL = 'authenticate:login'
 # Page to redirect to after login
 LOGIN_REDIRECT_URL = 'words_app:index'
 
-# WORDS_API_KEY = config('WORDS_API_KEY')
 WORDS_API_KEY = os.getenv('WORDS_API_KEY')
 
 # My variable: Configure caching using database cache backend

@@ -23,6 +23,11 @@ html {
     height: 40px;
 }
 
+.theme-img {
+    height: 20px;
+    width: 20px;
+}
+
 .header-container {
     padding: 1em 0;
 }

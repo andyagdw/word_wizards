@@ -33,7 +33,7 @@
 
     //  Change element classnames or attribute depending on theme
     if (theme === 'dark') {
-        themeToggleBtn.innerHTML = 'Light';
+        themeToggleBtn.innerHTML = `<img src='${window.sun_img}' alt='sun' class='theme-img' />`;
         themeToggleBtn.className = 'btn bg-light text-dark';
         html.setAttribute("data-bs-theme", "dark");
 
@@ -75,7 +75,7 @@
         }
 
     } else {
-        themeToggleBtn.innerHTML = 'Dark';
+        themeToggleBtn.innerHTML = `<img src='${window.moon_img}' alt='moon' class='theme-img' />`;
         themeToggleBtn.className = 'btn bg-dark text-light';
         html.setAttribute("data-bs-theme", "auto")
 
