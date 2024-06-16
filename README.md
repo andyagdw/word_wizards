@@ -45,9 +45,9 @@ Follow these simple steps to get started with Word Wizards:
 
 2. Ensure you have Python and Pip installed on your local machine. <br />
 3. Clone the repository to your local machine: <br />
-   `git clone https://github.com/andyagdw/words_wizards.git`
+   `git clone https://github.com/andyagdw/word_wizards.git`
 4. Navigate to the project directory: <br />
-   `cd words_wizards`
+   `cd word_wizards`
 5. Open Visual Studio Code: <br />
    `code .`
 6. Set up a virtual environment in Visual Studio Code terminal. <br />
