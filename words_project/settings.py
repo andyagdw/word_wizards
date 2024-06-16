@@ -137,7 +137,7 @@ LOGIN_URL = 'authenticate:login'
 # Page to redirect to after login
 LOGIN_REDIRECT_URL = 'words_app:index'
 
-WORDS_API_KEY = os.getenv('WORDS_API_KEY')
+WORDS_API_KEY = os.getenv('WORDS_API_KEY')  # Get environment variable
 
 # My variable: Configure caching using database cache backend
 # Run python manage.py createcachetable

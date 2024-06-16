@@ -32,7 +32,7 @@ def fetch_word(word: str = None, get_random_word: bool = True) -> dict:
 
     """
 
-    # The request should wait a maximum of 5 seconds for a response
+    # The request should wait a maximum of 8 seconds for a response
     timeout = 8
     url = "https://wordsapiv1.p.rapidapi.com/words/"
 
@@ -245,7 +245,7 @@ def process_word_data(word_data: dict, group_name: str) -> list:
         else ''
         )
 
-    # 'frequency' - How many times the word is used in everday life
+    # 'frequency' - How many times the word is used in everyday life
     if 'frequency' in word_data:
         frequency = word_data['frequency']
         usage_level = (

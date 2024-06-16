@@ -60,21 +60,20 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         elif 'add' in request.POST:
             word = request.POST['add']
             # Get favourite word or create a new one if it doesn't exist
-            # Word needs to be present before adding to users favourites
             favourite_word, _ = (
                 FavouriteWord.objects.get_or_create(word=word)
                 )
             user.favourite_words.add(favourite_word)
             return redirect('words_app:index')
 
-        # # Check if user wants to unfavourite a word
+        # Check if user wants to unfavourite a word
         elif 'remove' in request.POST:
             word = request.POST['remove']
-            # Ensure word exists before removing
             favourite_word = FavouriteWord.objects.get(word=word)
             user.favourite_words.remove(favourite_word)
 
             # Check if word is no longer favourited by any user
+            # This keeps the database clean
             if not favourite_word.users.count():
                 favourite_word.delete()
             return redirect('words_app:index')
@@ -89,7 +88,7 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
      syllable_count,
      results_data) = process_word_data(word_of_today_data, user_group)
 
-    # Check if word of today in users favourites
+    # Check if word of today is in users favourites
     word_of_today_in_users_favourites = (
         bool(user_favourite_words.filter(word__contains=word))
     )
@@ -137,13 +136,11 @@ def favourite_words(
     user_favourite_words = user.favourite_words.all()
 
     if request.method == 'POST':
-        # Value is a word the user wants to remove
         word = request.POST['remove']
         favourite_word = get_object_or_404(FavouriteWord, word=word)
         user.favourite_words.remove(favourite_word)
 
         # Check if word is no longer favourited by any user
-        # This keeps the database clean
         if not favourite_word.users.count():
             favourite_word.delete()
         return redirect('words_app:favourite')
@@ -181,8 +178,6 @@ def upgrade_account(
 
         user.groups.clear()  # Remove user from all groups
 
-        # if request.POST['upgrade_type'] == 'Starter':
-        # if 'starter_group' in request.POST:
         if request.POST.get('upgrade_type') == 'starter_group':
             starter_group = Group.objects.get(name='Starter')
             user.groups.add(starter_group)
@@ -192,8 +187,6 @@ def upgrade_account(
                              )
             return redirect('words_app:index')
 
-        # elif request.POST['upgrade_type'] == 'Plus':
-        # elif 'plus_group' in request.POST:
         if request.POST.get('upgrade_type') == 'plus_group':
             plus_group = Group.objects.get(name='Plus')
             user.groups.add(plus_group)
@@ -208,8 +201,6 @@ def upgrade_account(
                                  )
             return redirect('words_app:index')
 
-        # elif request.POST['upgrade_type'] == 'Pro':
-        # elif 'pro_group' in request.POST:
         if request.POST.get('upgrade_type') == 'pro_group':
             pro_group = Group.objects.get(name='Pro')
             user.groups.add(pro_group)
@@ -257,7 +248,7 @@ def view_word(request: HttpRequest,
     if request.method == 'POST':
         # Check user action - if they want to add or remove a word
         if 'add' in request.POST:
-            # Grab value from input type hidden
+            # Grab value from input type hidden in HTML template
             value = request.POST['add']
             # Get favourite word or create a new one if it doesn't exist
             favourite_word, _ = (
@@ -325,6 +316,7 @@ def random_word(request: HttpRequest) -> HttpResponse:
     if request.method == 'POST':
         if 'add' in request.POST:
             value = request.POST['add']
+            # Get favourite word or create a new one if it doesn't exist
             favourite_word, _ = (
                 FavouriteWord.objects.get_or_create(word=value)
                 )
@@ -334,6 +326,7 @@ def random_word(request: HttpRequest) -> HttpResponse:
             value = request.POST['remove']
             favourite_word = FavouriteWord.objects.get(word=value)
             user.favourite_words.remove(favourite_word)
+            # Check if word is no longer favourited by any user
             if not favourite_word.users.count():
                 favourite_word.delete()
             return redirect('words_app:random_word')
