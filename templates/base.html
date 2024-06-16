@@ -1,0 +1,45 @@
+<!-- templates/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="auto">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Andy Agyei-Dwumah" />
+    <meta name="description" content="Word Wizards is an engaging website where users can
+    explore the word of the day, search and discover new words, get random word suggestions,
+    play word games, and save their favourite words. Enhance your vocabulary and have fun with words!">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!--  -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <!--  -->
+    <!-- Important to load image variables here as they wouldn't be accessbile in JavaScript -->
+    <script>
+        window.img_light = "{% static 'images/word-wizards-logo-light.png' %}";
+        window.img_dark = "{% static 'images/word-wizards-logo-dark.png' %}";
+    </script>
+    <!--  -->
+    <!-- JAVASCRIPT -->
+    <script src="{% static 'javascript/index.js' %}" defer></script>
+    <!--  -->
+    <!-- ICON LIBRARY -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!--  -->
+    <title>{% block title %}Word Wizards |{% endblock title %}</title>
+</head>
+<!-- Ensures footer sticks at bottom -->
+<body class="d-flex flex-column vh-100" id="body">
+    {% include './partials/_navbar.html' %}
+    <main class="mb-5">
+        <div class="container-fluid">
+            {% block content %}{% endblock content %}
+        </div>
+    </main>
+    <!-- Ensures footer sticks at bottom -->
+    <div class="d-flex flex-grow-1"></div>
+    {% include './partials/_footer.html' %}
+</body>
+</html>

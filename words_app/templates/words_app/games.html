@@ -1,0 +1,18 @@
+<!-- words_app/templates/words_app/games.html
+ Namespace templates: Put templates inside another directory named after
+the application itself -->
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} Games{% endblock title %}
+
+{% block content %}
+<div class="container" role="region" aria-labelledby="games">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="games-text-container d-flex align-items-center justify-content-center">
+                <h1 id="games">Coming soon!</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

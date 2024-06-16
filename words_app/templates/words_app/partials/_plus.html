@@ -1,0 +1,72 @@
+<!-- words_app/templates/words_app/partials/_plus.html -->
+<div class="col-lg-4 p-4 border plus-container-light mb-4 mb-lg-0" id="div-plus-container">
+        <h2 class="text-center mb-5">Plus</h2>
+        <div class="row">
+            <div class="col-md-9 p-3 mx-auto border">
+                <h3 class="mb-4">Get access to...</h3>
+                <p><strong>Two word definitions! Plus:</strong></p>
+                <ul>
+                    <li class="check-tick-li">Examples</li>
+                    <li class="check-tick-li">Synonyms</li>
+                    <li class="check-tick-li">Antonyms</li>
+                    <li class="check-tick-li">Favourite Words</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 mt-4 text-center">
+                <button 
+                    type="button" 
+                    class="btn btn-primary" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#plus_group_div">
+                    {% if user_group == 'Starter' %}
+                        Upgrade
+                    {% elif user_group == 'Pro' %}
+                        Downgrade
+                    {% endif %}
+                </button>
+                <!-- Starter Modal -->
+                <div 
+                    class="modal fade" 
+                    id="plus_group_div" 
+                    tabindex="-1" 
+                    role="dialog" 
+                    aria-labelledby="plus_group_modal" 
+                    aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                    <form method="post">
+                        {% csrf_token %}
+                        <input 
+                            type="hidden" 
+                            name="upgrade_type" 
+                            value="plus_group">
+                        <div class="modal-header">
+                            <h5 
+                                class="modal-title" 
+                                id="plus_group_modal">{{ modalTitle }}
+                            </h5>
+                        </div>
+                        <div class="modal-body">
+                            {{ modalBody }}
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                type="button" 
+                                class="btn btn-secondary" 
+                                data-bs-dismiss="modal">{{ close }}
+                            </button>
+                            <button 
+                                type="submit" 
+                                class="btn btn-primary">{{ confirm }}
+                            </button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </div>

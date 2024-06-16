@@ -1,0 +1,38 @@
+<!-- words_app/templates/words_app/upgrade_account.html
+ Namespace templates: Put templates inside another directory named after
+the application itself -->
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} Upgrade Account{% endblock title %}
+
+{% block content %}
+<div class="container" role="region" aria-labelledby="upgrade-account">
+    <div class="row mb-5">
+        <div class="col-md-12 py-3">
+            <h1 
+                id="upgrade-account" 
+                class="py-4">
+                Upgrade Account
+            </h1>
+            <p class="ps-2">Current Account Type: 
+                <span class="text-muted">{{ user_group }}</span>
+            </p>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-evenly">
+    <!-- Display appropriate upgrade account types based on user group -->
+    {% with modalTitle='Change Account Type' modalBody='Are you sure you would like to change your account type?' close='Close' confirm='Confirm' %}
+    {% if user_group == 'Starter' %}
+        {% include './partials/_plus.html' %}
+        {% include './partials/_pro.html' %}
+    {% elif user_group == 'Plus' %}
+        {% include './partials/_starter.html' %}
+        {% include './partials/_pro.html' %}
+    {% elif user_group == 'Pro' %}
+        {% include './partials/_starter.html' %}
+        {% include './partials/_plus.html' %}
+    {% endif %}
+    {% endwith %}
+    </div>
+</div>
+{% endblock content %}

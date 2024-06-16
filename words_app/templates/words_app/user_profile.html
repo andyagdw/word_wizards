@@ -1,0 +1,31 @@
+<!-- words_app/templates/words_app/user_profile.html
+ Namespace templates: Put templates inside another directory named after
+the application itself -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ block.super }} My Profile{% endblock title %}
+
+{% block content %}
+<div class="container" role="region" aria-labelledby="my-profile">
+    <div class="row">
+        <div class="col-md-4 mx-auto">
+            <h1 
+                id="my-profile" 
+                class="text-center fw-bolder">
+                My Profile
+            </h1>
+            <div>
+                <img
+                src="{% static 'images/user-icon.png' %}" 
+                alt="user"
+                class="user-icon img-fluid" >
+            </div>
+            <h2 class="text-center mt-3">{{ request.user.username }}</h2>
+            <p class="text-center">Account Type: {{ user_group }}</p>
+            <p class="text-center">
+                Date Joined: {{ request.user.date_joined|date:"d M Y" }}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

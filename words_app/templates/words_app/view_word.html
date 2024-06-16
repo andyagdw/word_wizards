@@ -1,0 +1,125 @@
+<!-- words_app/templates/words_app/view_word.html
+ Namespace templates: Put templates inside another directory named after
+the application itself -->
+{% extends 'base.html' %}
+
+{% block title %}
+{% comment "Checks if users word exists" %}{% endcomment %}
+{% if users_word %}
+    {{ block.super }} {{ users_word|title }}
+{% else %}
+    {{ block.super }} Word not found
+{% endif %}
+{% endblock title %}
+
+{% block content %}
+{% comment "Checks if users word exists" %}{% endcomment %}
+{% if not word_data %}
+<div class="container" role="region" aria-labelledby="word-not-recognised">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="word-not-recognised-container d-flex align-items-center justify-content-center">
+                <h1 id="word-not-recognised">Oops! Word is not recognised</h1>
+            </div> 
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="container" role="region" aria-labelledby="view-word">
+    <div class="row">
+        <div class="col-md-12 border mb-5 py-5">
+            <h1 id="view-word" class="display-3 fw-bold ps-2 initial-letter">
+                {{ users_word|title }}
+                {% if not user_group == 'Starter' %}
+                    <form method="post" class="d-inline">
+                        {% csrf_token %}
+                        {% if word_in_user_favourites %}
+                            <input type="hidden" name="remove" value="{{ users_word }}">
+                            <button class="btn favourite-btn-remove">Unfavourite</button>
+                        {% else %}
+                            <input type="hidden" name="add" value="{{ users_word }}">
+                            <button class="btn favourite-btn-add">Favourite</button>
+                        {% endif %}
+                    </form>
+                {% endif %}
+            </h1>
+                <p class="ps-4">
+                    {% if usage_level and syllable_count %}
+                        {{ usage_level }} | {{ number_of_syllables_str }} {{syllable_count }}
+                    {% elif usage_level %}
+                        {{ usage_level }}
+                    {% elif syllable_count %}
+                        {{ number_of_syllables_str }} {{ syllable_count }}
+                    {% endif %}
+                </p>
+        </div>
+    </div>
+    {% if results_data %}
+        <div class="row justify-content-between">
+            <div class="col-md-3 border p-4">
+                <!-- Loop through all objects in results_data list -->
+                {% for result in results_data %}
+                    <h3 class="mt-3">{{ result.partOfSpeech|capfirst }}</h3>
+                    <p>{{ result.definition|capfirst }}</p>
+                    {% if user_group != 'Starter' %}
+                        {% if result.synonyms %}
+                            <h3 class="mt-4">Synonyms</h3>
+                            <div>
+                            {% for synonym in result.synonyms %}
+                                {% if forloop.last %}
+                                    <a href="{% url 'words_app:view_word' synonym %}">
+                                        {{ synonym|capfirst }}
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'words_app:view_word' synonym %}">
+                                        {{ synonym|capfirst }}
+                                    </a> |
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+                        {% if result.antonyms %}
+                            <h3 class="mt-4">Antonyms</h3>
+                            <div>
+                            {% for antonym in result.antonyms %}
+                                {% if forloop.last %}
+                                    <a href="{% url 'words_app:view_word' antonym %}">
+                                        {{ antonym|capfirst }}
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'words_app:view_word' antonym %}">
+                                        {{ antonym|capfirst }}
+                                    </a> |
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+                        {% if result.examples %}
+                            <h3 class="mt-4">Examples</h3>
+                            <div>
+                            {% for example in result.examples %}
+                                {% if forloop.last %}
+                                    {{ example|capfirst }}
+                                {% else %}
+                                    {{ example|capfirst }} <br><br>
+                                {% endif %}
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+                        <!-- Add horizontal line between different objects except for last-->
+                        {% if not forloop.last %}
+                            <hr />
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+        <!-- Only display upgrade account container if account type is starter and there
+         are results -->
+        {% if user_group == 'Starter' and results_data_first_result %}
+            {% include './partials/_upgrade_account.html' %}
+        </div>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock content %}

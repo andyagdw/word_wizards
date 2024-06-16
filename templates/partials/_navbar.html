@@ -1,0 +1,78 @@
+<!-- templates/partials/_navbar.html
+ convention to use underscore before the name of template -->
+{% load static %}
+
+{% if user_group == 'Starter' %}
+    <header class='bg-light mb-5 header-container header-starter-container' id="header">
+{% elif user_group == 'Plus' %}
+    <header class='bg-light mb-5 header-container header-plus-container' id="header">
+{% elif user_group == 'Pro' %}
+    <header class='bg-light mb-5 header-container header-pro-container' id="header">
+{% else %}
+    <!-- Before logging in -->
+    <header class='bg-light mb-5 header-container' id="header">
+{% endif %}
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a href="{% url 'words_app:index' %}" class="me-3 mb-4 mb-md-0">
+                    <img 
+                        src="{% static 'images/word-wizards-logo-light.png' %}"
+                        alt="Words Wizard logo"
+                        class="img-fluid"
+                        id="logo">
+                </a>
+                <button id="theme-toggler"></button>
+                {% if user.is_authenticated %}
+                <!-- Show links if user is logged in -->
+                    <button
+                        class="navbar-toggler" 
+                        type="button" 
+                        data-bs-toggle="collapse"
+                        data-bs-target="#div-links-container"
+                        aria-controls="div-links-container"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div 
+                        class="collapse navbar-collapse justify-content-end"
+                        id="div-links-container">
+                    {% block nav %}
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'words_app:random_word' %}">
+                                    Get random word 
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'words_app:games' %}">
+                                    Games
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'words_app:favourite' %}">
+                                    Favourite words
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'words_app:upgrade_account' %}">
+                                    Change account type?
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'words_app:user_profile' %}">
+                                    Profile
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'authenticate:logout' %}">
+                                    Log out
+                                </a>
+                            </li>
+                        </ul>
+                    {% endblock nav %}
+                    </div>
+                {% endif %}
+            </div>
+        </nav>
+    </header>

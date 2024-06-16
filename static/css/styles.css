@@ -1,0 +1,165 @@
+/* ALL */
+
+:root {
+    --white: #fff;
+    --green: #0db921;
+    --blue: #2023cb;
+    --pink: #ff66c4;
+    --black: #000;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+}
+
+#logo {
+    width: 220px;
+    height: 40px;
+}
+
+.header-container {
+    padding: 1em 0;
+}
+
+.header-starter-container {
+    box-shadow: 5px 5px 10px var(--pink);
+}
+
+.header-plus-container {
+    box-shadow: 5px 5px 10px var(--green);
+}
+
+.header-pro-container {
+    box-shadow: 5px 5px 10px var(--blue);
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+li.check-tick-li {
+    list-style: none;
+    padding: 2px 20px;
+    background-image: url('../images/check-mark.png');
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 10px;
+}
+
+.initial-letter::first-letter {
+    text-decoration: underline;
+}
+
+/* CONTAINERS  */
+
+:is(.index-no-word-container,
+ .word-not-recognised-container,
+ .starter-upgrade-account-container,
+ .no-favourite-words-container,
+ .games-text-container) {
+    height: 20em;
+}
+
+/* AUTHENTICATE TEMPLATES */
+
+.authenticate-links {
+    text-decoration: underline;
+    color: var(--blue);
+}
+
+.authenticate-links:hover {
+    color: initial;
+    text-decoration: initial;
+}
+
+/*  FAVOURITES */
+
+.favourite-img {
+    width: 100%;
+}
+
+/* INDEX */
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 52%;
+    left: 2%;
+}
+
+.search-input {
+    padding-left: 2.5em;
+}
+
+/* VIEW WORD AND GET RANDOM WORD */
+
+.favourite-btn-add {
+    background-color: #FFD700;
+}
+
+.favourite-btn-add:hover {
+    background-color: #FFC107;
+}
+
+.favourite-btn-remove {
+    background-color: #FF6347;
+    color: var(--white);
+}
+
+.favourite-btn-remove:hover {
+    background-color: #FF4500;
+}
+
+.upgrade-account-heading-link {
+    transition: 0.5s;
+    color: var(--black);
+}
+
+.upgrade-account-heading-link:hover {
+    text-decoration: none;
+}
+
+/*  UPGRADE ACCOUNT */
+
+.starter-container-light {
+    background: linear-gradient(to top, var(--white) 95%, var(--pink))
+}
+    
+.plus-container-light {
+    background: linear-gradient(to top, var(--white) 95%, var(--green))
+}
+    
+.pro-container-light {
+    background: linear-gradient(to top, var(--white) 95%, var(--blue))
+}
+
+.starter-container-dark {
+    background: linear-gradient(to top, transparent 95%, var(--pink))
+}
+
+.plus-container-dark {
+    background: linear-gradient(to top, transparent 95%, var(--green))
+}
+
+.pro-container-dark {
+    background: linear-gradient(to top, transparent 95%, var(--blue))
+}
+
+/* USER PROFILE TEMPLATE */
+
+.user-icon {
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+}

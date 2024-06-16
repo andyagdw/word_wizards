@@ -1,0 +1,152 @@
+<!-- words_app/templates/words_app/index.html
+ Namespace templates: Put templates inside another directory named after
+the application itself -->
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{ block.super }} Home Page{% endblock title %}
+
+{% block content %}
+<!-- Display word of today section only if there is a word -->
+{% if not word_of_today_data %}
+<div class="container" role="region" aria-labelledby="word-of-today">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="index-no-word-container d-flex align-items-center justify-content-center">
+                <h1 id="word-of-today">No word today</h1>
+            </div>
+        </div>
+    </div>
+</div>
+{% else %}
+    <div class="container" role="region" aria-labelledby="word-of-today">
+        <!-- Upgrade account message -->
+        {% if messages %}
+            <div class="row">
+                <div class="col-md-12">
+                    {% for message in messages %}
+                        <div class="{{ message.tags }} border p-4 fw-bold fs-5 bg-secondary text-white">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+        <div class="row">
+            <div class="col-md-4 mx-auto my-4">
+                <form method="post">
+                    {% csrf_token %}
+                    {% for field in form %}
+                    <!-- Display container as relative and display image as position absolute in css -->
+                        <div class="form-group position-relative">
+                            <label for="{{ field.id_for_label }}" class="form-label"></label>
+                            <img 
+                            src="{% static 'images/search-icon.png' %}" 
+                            alt="search" 
+                            class="search-icon img-fluid">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                </form>
+            </div>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-12 p-3 mb-5">
+                <h1 id="word-of-today" class="display-4 fw-bold">Word Of The Day</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 bg-light p-3 mb-5 mx-auto" id="word-of-the-day-data-container">
+                <h2 class="initial-letter">
+                    {{ word_of_today_word|title }}
+                    {% if not user_group == 'Starter' %}
+                        <form method="post" class="d-inline">
+                            {% csrf_token %}
+                            {% if user_favourite_words %}
+                                <input type="hidden" name="remove" value="{{ word_of_today_word }}">
+                                <button class="btn favourite-btn-remove">Unfavourite</button>
+                            {% else %}
+                                <input type="hidden" name="add" value="{{ word_of_today_word }}">
+                                <button class="btn favourite-btn-add">Favourite</button>
+                            {% endif %}
+                        </form>
+                    {% endif %}
+                </h2>
+                <p>
+                    <!-- Checking when to display the pipe symbol -->
+                    {% if results_data.partOfSpeech and usage_level and word_of_today_syllable_count %}
+                        {{ results_data.partOfSpeech|capfirst }} | 
+                        {{ usage_level }} | 
+                        {{ number_of_syllables_str }} {{ word_of_today_syllable_count }}
+
+                    {% elif results_data.partOfSpeech and usage_level %}
+                        {{ results_data.partOfSpeech|capfirst }} | 
+                        {{ usage_level }}
+
+                    {% elif usage_level and word_of_today_syllable_count  %}
+                        {{ usage_level }} | 
+                        {{ number_of_syllables_str }} {{ word_of_today_syllable_count }}
+
+                    {% elif results_data.partOfSpeech and word_of_today_syllable_count %}
+                        {{ results_data.partOfSpeech|capfirst }} | 
+                        {{ number_of_syllables_str }} {{ word_of_today_syllable_count }}
+                    
+                    {% elif results_data.partOfSpeech %}
+                        {{ results_data.partOfSpeech|capfirst }}
+
+                    {% elif usage_level %}
+                        {{ usage_level }}
+
+                    {% elif word_of_today_syllable_count %}
+                        {{ number_of_syllables_str }} {{ word_of_today_syllable_count }}
+                    {% endif %}
+                </p>
+                <p class="pt-3">
+                    {% if results_data.definition %}
+                        {{ results_data.definition|capfirst }}
+                    {% else %}
+                        Definition coming soon!
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+        <!-- Do not display synoynm section if there aren't no synonyms -->
+        {% if results_data.synonyms %}
+            <div class="row border">
+                <div class="col-md-12 p-4">
+                    <h3 class="text-center h2">See related words</h3>
+                    <div class="row">
+                        <div class="col-md-4 border mx-auto text-center my-4 p-4">
+                            <!-- Display the last synonym without pipe -->
+                            {% for synonym in results_data.synonyms %}
+                                {% if forloop.last %}
+                                    <a href="{% url 'words_app:view_word' synonym %}">
+                                        {{ synonym|capfirst }}
+                                    </a>
+                                {% else %}
+                                    <a href="{% url 'words_app:view_word' synonym %}">
+                                        {{ synonym|capfirst }}
+                                    </a> |
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    {% endif %}
+{% endif %}
+{% endblock content %}
+
+<!-- CHECK GROUPS AND PERMISSIONS -->
+        <!-- {% if perms.words_app.add_favouriteword %} -->
+        <!-- <p>I have permission to add favourite word</p> -->
+        <!-- {% else %} -->
+        <!-- <p>You do not have permission to add a favourite word</p> -->
+        <!-- <p>{{ perms }}</p> -->
+        <!-- {% endif %} -->
+        <!-- {% for group in request.user.groups.all %} -->
+            <!-- {% if group.name == 'Starter' %} -->
+            <!-- {{ group }} -->
+            <!-- {% endif %} -->
+        <!-- {% endfor %} -->
