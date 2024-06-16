@@ -12,9 +12,7 @@ import requests
 import pytz
 from django.conf import settings
 from django.core.cache import cache
-# import logging
 
-# logger = logging.getLogger(__name__)
 
 def fetch_word(word: str = None, get_random_word: bool = True) -> dict:
     """
@@ -90,12 +88,6 @@ def is_cache_valid(timestamp: str) -> bool:
         )
 
 
-# def convert_seconds(seconds: int) -> str:
-#     hours = seconds // 3600
-#     minutes = (seconds % 3600) // 60
-    
-#     return f'{hours}{minutes}'
-
 def seconds_until_midnight_uk() -> int:
     """
     Calculates the number of seconds until midnight UK time
@@ -115,12 +107,6 @@ def seconds_until_midnight_uk() -> int:
         (now_uk + datetime.timedelta(days=1)).
         replace(hour=0, minute=0, second=0, microsecond=0)
         )
-    # seconds_until_midnight = int((midnight_uk - now_uk).total_seconds())
-
-    # print(f"{now_utc = }")
-    # print(f"{now_uk = }")
-    # print(f"{midnight_uk = }")
-    # print(f"Hours and Mins until midnight: {convert_seconds(seconds_until_midnight)}")
 
     return int((midnight_uk - now_uk).total_seconds())
 
@@ -145,13 +131,6 @@ def get_word_of_day() -> dict:
     # Retrieve cached data and timestamp
     cached_data = cache.get(cache_key)
     cached_timestamp = cache.get(cache_timestamp_key)
-    # Timeout of 24 hours
-    # timeout = 86400
-
-    # if cached_data:
-    #     logger.debug(f"Cached data: {cached_data}")
-    # if cached_timestamp:
-    #     logger.debug(f"Cached timestamp: {cached_timestamp}")
 
     if (cached_data
             and cached_timestamp
@@ -162,19 +141,15 @@ def get_word_of_day() -> dict:
         if word_of_today_data:
             now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             timeout = seconds_until_midnight_uk()
-            # Set cache with a timeout of 24 hours
             cache.set(cache_key, word_of_today_data, timeout=timeout)
             (cache.set(
                 cache_timestamp_key,
                 now,
                 timeout=timeout))
-            # logger.debug(f"New data cached: {word_of_today_data}")
-            # logger.debug(f"New timestamp cached: {now}")
             return word_of_today_data
 
     return {}
 
-# logging.basicConfig(level=logging.DEBUG)
 
 def process_word_data_results(group_name: str,
                               word_data: dict) -> None | list:

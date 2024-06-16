@@ -14,7 +14,10 @@ from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.shortcuts import redirect, get_object_or_404
-from .utils import process_word_data, get_word_of_day, fetch_word, seconds_until_midnight_uk
+from .utils import (process_word_data,
+                    get_word_of_day,
+                    fetch_word
+                    )
 from .forms import SearchForm
 from .models import FavouriteWord
 
@@ -96,8 +99,6 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         results_data[:1] if results_data is not None else None
         )
     results_data_obj = results_data_list
-
-    seconds_until_midnight_uk()
 
     context = {
         'number_of_syllables_str': 'Number of syllables:',
@@ -278,7 +279,7 @@ def view_word(request: HttpRequest,
      word,
      syllable_count,
      results_data) = process_word_data(get_word, user_group)
-    
+
     # Display the 'upgrade_account' container if there are results
     results_data_first_result = (
         results_data[:1][0]
