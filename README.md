@@ -66,7 +66,7 @@ Follow these simple steps to get started with Word Wizards:
    virtualenv venv
    ```
 
-7. Activate the virtual environment
+7. Activate the virtual environment.
 
    Using venv:
 
