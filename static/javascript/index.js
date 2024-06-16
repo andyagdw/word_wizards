@@ -10,6 +10,7 @@
   const themeToggleBtn = document.getElementById('theme-toggler');
   const html = document.documentElement;
   const header = document.getElementById('header');
+  const navbar = document.getElementById('navbar');
   const logo = document.getElementById("logo");
   const footer = document.getElementById("footer")
   const word_of_the_day_data_container = document.getElementById("word-of-the-day-data-container");
@@ -33,7 +34,8 @@
 
     //  Change element classnames or attribute depending on theme
     if (theme === 'dark') {
-        themeToggleBtn.innerHTML = `<img src='${window.sun_img}' alt='sun' class='theme-img' />`;
+        // See templates/partials/_navbar.html
+        themeToggleBtn.innerHTML = `<img src=${navbar.dataset.lightModeImg} alt='sun' class='theme-img' />`;
         themeToggleBtn.className = 'btn bg-light text-dark';
         html.setAttribute("data-bs-theme", "dark");
 
@@ -53,8 +55,8 @@
             header.className = "mb-5 header-container border-bottom";
         }
         
-        // See head section in 'base.html'
-        logo.setAttribute("src", window.img_dark);
+        // See templates/partials/_navbar.html
+        logo.setAttribute("src", navbar.dataset.imgLogoDark);
         footer.classList.remove("bg-light");
         
         if (word_of_the_day_data_container) {
@@ -75,7 +77,8 @@
         }
 
     } else {
-        themeToggleBtn.innerHTML = `<img src='${window.moon_img}' alt='moon' class='theme-img' />`;
+        // See templates/partials/_navbar.html
+        themeToggleBtn.innerHTML =`<img src=${navbar.dataset.darkModeImg} alt='moon' class='theme-img' />`;
         themeToggleBtn.className = 'btn bg-dark text-light';
         html.setAttribute("data-bs-theme", "auto")
 
@@ -94,8 +97,8 @@
         else {
             header.className = "bg-light mb-5 header-container";
         }
-        // See head section in 'base.html'
-        logo.setAttribute("src", window.img_light);
+        // See templates/partials/_navbar.html
+        logo.setAttribute("src", navbar.dataset.imgLogoLight);
         footer.classList.add("bg-light");
 
         if (word_of_the_day_data_container) {

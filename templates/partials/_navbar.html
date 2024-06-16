@@ -12,7 +12,16 @@
     <!-- Before logging in -->
     <header class='bg-light mb-5 header-container' id="header">
 {% endif %}
-        <nav class="navbar navbar-expand-lg">
+        <!-- Store data attributes to get access to 'static' in index.js -->
+         <!-- https://developer.mozilla.org/en-US/docs/Learn/HTML/Howto/Use_data_attributes -->
+        <nav 
+            class="navbar navbar-expand-lg"
+            id="navbar"
+            data-img-logo-light="{% static 'images/word-wizards-logo-light.png' %}"
+            data-img-logo-dark="{% static 'images/word-wizards-logo-dark.png' %}"
+            data-light-mode-img="{% static 'images/light-mode-sun.png' %}"
+            data-dark-mode-img="{% static 'images/dark-mode-moon.png' %}"
+            >
             <div class="container">
                 <a href="{% url 'words_app:index' %}" class="me-3 mb-4 mb-md-0">
                     <img 
