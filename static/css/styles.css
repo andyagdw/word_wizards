@@ -133,6 +133,7 @@ li.check-tick-li {
 
 .upgrade-account-heading-link:hover {
     text-decoration: none;
+    color: var(--blue);
 }
 
 /*  UPGRADE ACCOUNT */
