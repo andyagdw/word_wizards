@@ -138,27 +138,43 @@ li.check-tick-li {
 /*  UPGRADE ACCOUNT */
 
 .starter-container-light {
-    background: linear-gradient(to top, var(--white) 95%, var(--pink))
+    background: linear-gradient(to top, var(--white) 95%, var(--pink));
 }
     
 .plus-container-light {
-    background: linear-gradient(to top, var(--white) 95%, var(--green))
+    background: linear-gradient(to top, var(--white) 95%, var(--green));
 }
     
 .pro-container-light {
-    background: linear-gradient(to top, var(--white) 95%, var(--blue))
+    background: linear-gradient(to top, var(--white) 95%, var(--blue));
 }
 
 .starter-container-dark {
-    background: linear-gradient(to top, transparent 95%, var(--pink))
+    background: linear-gradient(to top, transparent 95%, var(--pink));
 }
 
 .plus-container-dark {
-    background: linear-gradient(to top, transparent 95%, var(--green))
+    background: linear-gradient(to top, transparent 95%, var(--green));
 }
 
 .pro-container-dark {
-    background: linear-gradient(to top, transparent 95%, var(--blue))
+    background: linear-gradient(to top, transparent 95%, var(--blue));
+}
+
+.modal-title::after {
+    content: 'Change Account Type';
+}
+
+.modal-body::after {
+    content: 'Are you sure you would like to change your account type?';
+}
+
+button[data-modal-close]::after {
+    content: attr(data-modal-close);
+}
+
+button[data-modal-confirm]::after {
+    content: attr(data-modal-confirm);
 }
 
 /* USER PROFILE TEMPLATE */
