@@ -18,6 +18,19 @@ and enjoy a richer experience free of cost ❗.
 * **Account Upgrades**: <br /> Upgrade your account to unlock 'Plus' or 'Pro' features, enhancing your word
  discovery experience with additional functionalities.
 
+## Light and Dark Mode 🌓
+
+Words Wizards offers a seamless experience with both light and dark modes. Choose the theme that suits your preference
+and enjoy the interface in any lighting condition 😄.
+
+### Light Mode (Plus account)
+
+![Light Mode](https://github.com/andyagdw/words_wizards/assets/138252680/c4e1d9e1-e7f5-4482-9eae-792053c3a875)
+
+### Dark Mode (Plus account)
+
+![Dark Mode](https://github.com/andyagdw/words_wizards/assets/138252680/d75d19d5-e1d3-48ff-b99e-143b965036b2)
+
 ## Getting started ✅
 
 Follow these simple steps to get started with Words Wizards:
