@@ -35,14 +35,22 @@ and enjoy the interface in any lighting condition 😄.
 
 Follow these simple steps to get started with Words Wizards:
 
-1. Ensure you have Python and Pip installed on your local machine. <br />
-2. Clone the repository to your local machine: <br />
+1. Create an Account with RapidAPI:
+* Go to the [WordsAPI RapidAPI page](https://rapidapi.com/dpventures/api/wordsapi/pricing).
+* Sign up for a free basic plan, which provides access to 2,500 requests per day.
+* After subscribing to the WordsAPI, you should be redirected to a page where you can view your X-RapidAPI-Key.
+* If you are not automatically redirected, navigate to the workspace by clicking on the "Workspace" button on the
+  left sidebar, then scroll down to "My Subscriptions" and select "WordsAPI" to view your API key.
+* Copy your X-RapidAPI-Key for later use.
+
+2. Ensure you have Python and Pip installed on your local machine. <br />
+3. Clone the repository to your local machine: <br />
    `git clone https://github.com/andyagdw/words_wizards.git`
-3. Navigate to the project directory: <br />
+4. Navigate to the project directory: <br />
    `cd words_wizards`
-4. Open Visual Studio Code: <br />
+5. Open Visual Studio Code: <br />
    `code .`
-5. Set up a virtual environment in Visual Studio Code terminal. <br />
+6. Set up a virtual environment in Visual Studio Code terminal. <br />
    Make sure you are in the project directory.
 
    Using venv:
@@ -58,7 +66,7 @@ Follow these simple steps to get started with Words Wizards:
    virtualenv venv
    ```
 
-6. Activate the virtual environment
+7. Activate the virtual environment
 
    Using venv:
 
@@ -74,13 +82,16 @@ Follow these simple steps to get started with Words Wizards:
    Unix\Mac: <br />
    `source venv/bin/activate`
 
-7. Ensure project dependencies are installed: <br />
+8. Ensure project dependencies are installed: <br />
    ```pip install -r requirements.txt```
-   
-8. In the project directory, start the server: <br />
+
+9. Create a `.env` file in the project directory and add your WordsAPI key that you copied earlier on <br />
+   Then, open the `.env` file and replace `your_api_key_here` with your actual WordsAPI key.
+
+10. In the project directory, start the server: <br />
    `python manage.py runserver`
 
-9. Click the link that shows in the terminal!
+11. Click the link that shows in the terminal!
 
 ## Upcoming Features 🎆
 
