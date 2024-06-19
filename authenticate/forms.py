@@ -8,6 +8,7 @@ Each field is styled with Bootstrap classes for consistent UI design
 # authenticate/forms.py
 
 from django import forms
+from django.core.exceptions import ValidationError
 
 
 class RegisterForm(forms.Form):
@@ -40,3 +41,27 @@ class RegisterForm(forms.Form):
                 }
             )
         )
+
+    def clean(self):
+        """
+        Overrides the default clean method in Django's 'forms.Form'
+        class to add custom validation logic
+
+        This ensures that the form becomes invalid, granting access to
+        form errors, which could be displayed to the user
+        """
+
+        # Call 'forms.Form' clean method to retrieve the cleaned data
+        cleaned_data = super().clean()
+
+        # Retrieve the password and confirm_password from the data
+        password = cleaned_data.get("password")
+        confirm_password = cleaned_data.get("confirm_password")
+
+        # Check if password and confirm_password are valid
+        if password and confirm_password and password != confirm_password:
+            # Raise a validation error if the passwords do not match
+            raise ValidationError("Passwords do not match. Try again")
+
+        # Return the cleaned data
+        return cleaned_data

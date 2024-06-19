@@ -10,10 +10,13 @@ the application itself -->
     <div class="row">
         <div class="col-md-5 mx-auto">
             <h1 id="register">Register</h1>
+            <!-- Raise ValidationError if passwords do not match -->
             {% if form.errors %}
-                <p class="text-danger">There was an error trying to register your account.
-                    Please try again.
-                </p>
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <p class="text-danger">{{ error }}</p>
+                    {% endfor %}
+                {% endfor %}
             {% endif %}
             <form method="post">
                 {% csrf_token %}

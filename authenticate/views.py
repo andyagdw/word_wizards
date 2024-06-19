@@ -46,7 +46,8 @@ def register_user(
                 login(request, new_user)
                 return redirect('words_app:index')
 
-    form = RegisterForm()
+    else:
+        form = RegisterForm()
 
     context = {
         'form': form,
