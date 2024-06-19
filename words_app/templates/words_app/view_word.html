@@ -18,8 +18,9 @@ the application itself -->
 <div class="container" role="region" aria-labelledby="word-not-recognised">
     <div class="row">
         <div class="col-md-12">
-            <div class="word-not-recognised-container d-flex align-items-center justify-content-center">
+            <div class="word-not-recognised-container d-flex align-items-center justify-content-center flex-column">
                 <h1 id="word-not-recognised">Oops! Word is not recognised</h1>
+                <p class="pt-4">Back to <a href="{% url 'words_app:index' %}">home page</a>?</p>
             </div> 
         </div>
     </div>
