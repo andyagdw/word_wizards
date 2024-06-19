@@ -1,0 +1,22 @@
+<!-- words_app/templates/words_app/partials/_search.html -->
+{% load static %}
+
+<!-- Search box to search a word -->
+<div class="row">
+    <div class="col-md-4 mx-auto my-4">
+        <form method="post">
+            {% csrf_token %}
+            {% for field in form %}
+            <!-- Display container as relative and display image as position absolute in css -->
+                <div class="form-group position-relative">
+                    <label for="{{ field.id_for_label }}" class="form-label"></label>
+                    <img 
+                    src="{% static 'images/search-icon.png' %}" 
+                    alt="search" 
+                    class="search-icon img-fluid">
+                    {{ field }}
+                </div>
+            {% endfor %}
+        </form>
+    </div>
+</div>

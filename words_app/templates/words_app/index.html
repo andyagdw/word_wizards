@@ -2,7 +2,6 @@
  Namespace templates: Put templates inside another directory named after
 the application itself -->
 {% extends 'base.html' %}
-{% load static %}
 {% block title %}{{ block.super }} Home Page{% endblock title %}
 
 {% block content %}
@@ -31,25 +30,8 @@ the application itself -->
                 </div>
             </div>
         {% endif %}
-        <div class="row">
-            <div class="col-md-4 mx-auto my-4">
-                <form method="post">
-                    {% csrf_token %}
-                    {% for field in form %}
-                    <!-- Display container as relative and display image as position absolute in css -->
-                        <div class="form-group position-relative">
-                            <label for="{{ field.id_for_label }}" class="form-label"></label>
-                            <img 
-                            src="{% static 'images/search-icon.png' %}" 
-                            alt="search" 
-                            class="search-icon img-fluid">
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                </form>
-            </div>
-            <hr>
-        </div>
+        <!-- Search box to search a word -->
+        {% include './partials/_search.html' %}
         <div class="row">
             <div class="col-md-12 p-3 mb-5">
                 <h1 id="word-of-today" class="display-4 fw-bold">Word Of The Day</h1>

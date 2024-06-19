@@ -27,6 +27,8 @@ the application itself -->
 </div>
 {% else %}
 <div class="container" role="region" aria-labelledby="view-word">
+    <!-- Search box to search a word -->
+    {% include './partials/_search.html' %}
     <div class="row">
         <div class="col-md-12 border mb-5 py-5">
             <h1 id="view-word" class="display-3 fw-bold ps-2 initial-letter">

@@ -273,6 +273,11 @@ def view_word(request: HttpRequest,
             if not favourite_word.users.count():
                 favourite_word.delete()
             return redirect('words_app:view_word', word=value)
+        elif 'search' in request.POST:
+            user_word = request.POST['search']
+            return redirect('words_app:view_word', word=user_word)
+
+    form = SearchForm()
 
     # Process the word data to extract required fields
     (usage_level,
@@ -297,6 +302,7 @@ def view_word(request: HttpRequest,
         'results_data': results_data,
         'word_in_user_favourites': word_in_user_favourites,
         'results_data_first_result': results_data_first_result,
+        'form': form,
     }
 
     return render(request, 'words_app/view_word.html', context=context)
