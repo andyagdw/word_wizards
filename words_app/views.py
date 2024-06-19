@@ -33,7 +33,7 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     valid. If valid, it uses the cached data. Otherwise, it fetches new
     data from WordsAPI and updates the cache
 
-    Takes in a httprequest and renders the index template
+    Takes in a HttpRequest and renders the index template
 
     Parameters
     ----------
@@ -42,7 +42,7 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
 
     Returns
     ----------
-    httpresponse | httresponseredirect
+    HttpResponse | HttpResponseRedirect
 
     """
 
@@ -117,7 +117,10 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
 @login_required
 def favourite_words(
         request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
-    """Takes in a httprequest and renders the favourite template
+    """
+    Displays all the favourite words associated with a user
+
+    Takes in a HttpRequest and renders the favourite template
 
     Parameters
     ----------
@@ -126,7 +129,7 @@ def favourite_words(
 
     Returns
     ----------
-    httpresponse | httresponseredirect
+    HttpResponse | HttpResponseRedirect
 
     """
 
@@ -156,7 +159,10 @@ def favourite_words(
 @login_required
 def upgrade_account(
         request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
-    """Takes in a httprequest and renders the upgrade_account template
+    """
+    Allows a user to upgrade or downgrade their account type
+    
+    Takes in a HttpRequest and renders the upgrade_account template
 
     Parameters
     ----------
@@ -165,7 +171,7 @@ def upgrade_account(
 
     Returns
     ----------
-    httpresponse | httresponseredirect
+    HttpResponse | HttpResponseRedirect
 
     """
 
@@ -223,7 +229,10 @@ def upgrade_account(
 @login_required
 def view_word(request: HttpRequest,
               word: str) -> HttpResponse | HttpResponseRedirect:
-    """Takes in a httprequest and a word and then renders
+    """
+    Displays a word that the user has requested to view
+
+    Takes in a HttpRequest and a word and then renders
     the games template
 
     Parameters
@@ -235,7 +244,7 @@ def view_word(request: HttpRequest,
 
     Returns
     ----------
-    httpresponse | httresponseredirect
+    HttpResponse | HttpResponseRedirect
 
     """
 
@@ -294,8 +303,12 @@ def view_word(request: HttpRequest,
 
 
 @login_required
-def random_word(request: HttpRequest) -> HttpResponse:
-    """Takes in a httprequest and renders the view_word template
+def random_word(request: HttpRequest
+                ) -> HttpResponse | HttpResponseRedirect:
+    """
+    Displays a random word
+
+    Takes in a HttpRequest and renders the view_word template
 
     Parameters
     ----------
@@ -304,7 +317,7 @@ def random_word(request: HttpRequest) -> HttpResponse:
 
     Returns
     ----------
-    httpresponse | httresponseredirect
+    HttpResponse | HttpResponseRedirect
 
     """
 
@@ -359,7 +372,10 @@ def random_word(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def view_games(request: HttpRequest) -> HttpResponse:
-    """Takes in a httprequest and renders the games template
+    """
+    Displays the games section (available only for 'Pro' account type)
+
+    Takes in a HttpRequest and renders the games template
 
     Parameters
     ----------
@@ -368,7 +384,7 @@ def view_games(request: HttpRequest) -> HttpResponse:
 
     Returns
     ----------
-    httpresponse
+    HttpResponse
 
     """
 
@@ -384,7 +400,10 @@ def view_games(request: HttpRequest) -> HttpResponse:
 
 @login_required
 def user_profile(request: HttpRequest) -> HttpResponse:
-    """Takes in a httprequest and renders the user_profile template
+    """
+    Displays the user profile section
+
+    Takes in a HttpRequest and renders the user_profile template
 
     Parameters
     ----------
@@ -393,7 +412,7 @@ def user_profile(request: HttpRequest) -> HttpResponse:
 
     Returns
     ----------
-    httpresponse
+    HttpResponse
 
     """
 

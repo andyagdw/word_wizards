@@ -17,7 +17,9 @@ from .forms import RegisterForm
 def register_user(
         request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     """
-    Takes in a httprequest and renders the index template
+    Displays a register form
+
+    Takes in a HttpRequest and renders the register template
 
     Parameters
     ----------
@@ -26,7 +28,7 @@ def register_user(
 
     Returns
     ----------
-    httpresponse | httresponseredirect
+    HttpResponse | HttpResponseRedirect
     """
 
     if request.method == 'POST':
@@ -54,7 +56,10 @@ def register_user(
 
 
 def logout_user(request: HttpRequest) -> HttpResponseRedirect:
-    """Takes in a httprequest and returns a httpresponseredirect
+    """
+    Logs out a user and redirects them back to login page
+
+    Takes in a HttpRequest and returns a HttpResponseRedirect
 
     Parameters
     ----------
@@ -63,7 +68,7 @@ def logout_user(request: HttpRequest) -> HttpResponseRedirect:
 
     Returns
     ----------
-    httpresponseredirect
+    HttpResponseRedirect
 
     """
     logout(request)
