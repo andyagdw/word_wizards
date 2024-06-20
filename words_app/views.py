@@ -51,13 +51,9 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     user_favourite_words = user.favourite_words.all()
 
     if request.method == 'POST':
-        # Check if user wants to view a word
-        if 'search' in request.POST:
-            user_word = request.POST['search']
-            return redirect('words_app:view_word', word=user_word)
 
         # Check if user wants to favourite a word
-        elif 'add' in request.POST:
+        if 'add' in request.POST:
             word = request.POST['add']
             # Get favourite word or create a new one if it doesn't exist
             favourite_word, _ = (
@@ -77,6 +73,13 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
             if not favourite_word.users.count():
                 favourite_word.delete()
             return redirect('words_app:index')
+
+    if request.method == 'GET':
+
+        # Check if user wants to view a word
+        if 'search' in request.GET:
+            user_word = request.GET['search']
+            return redirect('words_app:view_word', word=user_word)
 
     form = SearchForm()
 
@@ -273,8 +276,11 @@ def view_word(request: HttpRequest,
             if not favourite_word.users.count():
                 favourite_word.delete()
             return redirect('words_app:view_word', word=value)
-        elif 'search' in request.POST:
-            user_word = request.POST['search']
+
+    if request.method == 'GET':
+
+        if 'search' in request.GET:
+            user_word = request.GET['search']
             return redirect('words_app:view_word', word=user_word)
 
     form = SearchForm()
