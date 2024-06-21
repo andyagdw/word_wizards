@@ -68,10 +68,11 @@ li.check-tick-li {
 /* CONTAINERS  */
 
 :is(.index-no-word-container,
- .word-not-recognised-container,
- .starter-upgrade-account-container,
- .no-favourite-words-container,
- .games-text-container) {
+    .word-not-recognised-container,
+    .starter-upgrade-account-container,
+    .no-favourite-words-container,
+    .games-text-container,
+    .words-no-results-container) {
     height: 20em;
 }
 
@@ -141,11 +142,11 @@ li.check-tick-li {
 .starter-container-light {
     background: linear-gradient(to top, var(--white) 95%, var(--pink));
 }
-    
+
 .plus-container-light {
     background: linear-gradient(to top, var(--white) 95%, var(--green));
 }
-    
+
 .pro-container-light {
     background: linear-gradient(to top, var(--white) 95%, var(--blue));
 }
