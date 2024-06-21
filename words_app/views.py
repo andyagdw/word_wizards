@@ -8,6 +8,7 @@ and interacts with the WordsAPI and the database as needed
 """
 # words_app/views.py
 
+from urllib.parse import unquote
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
@@ -18,8 +19,9 @@ from .utils import (process_word_data,
                     get_word_of_day,
                     fetch_word
                     )
-from .forms import SearchForm
+from .forms import BasicSearchForm, AdvancedSearchForm
 from .models import FavouriteWord
+from . import constants
 
 
 # Create your views here.
@@ -43,7 +45,6 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     Returns
     ----------
     HttpResponse | HttpResponseRedirect
-
     """
 
     user = request.user
@@ -75,13 +76,84 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
             return redirect('words_app:index')
 
     if request.method == 'GET':
+        form_type = request.GET.get("form_type")
 
         # Check if user wants to view a word
-        if 'search' in request.GET:
+        if form_type == 'basic_search':
             user_word = request.GET['search']
             return redirect('words_app:view_word', word=user_word)
 
-    form = SearchForm()
+        # Check if user wants to view multiple words
+        elif form_type == 'advanced_search':
+            advanced_search_form = AdvancedSearchForm(request.GET)
+            if advanced_search_form.is_valid():
+                letter_pattern = (
+                    advanced_search_form.cleaned_data.
+                    get('letter_pattern', '')
+                    )
+                letters_min = (
+                    advanced_search_form.cleaned_data.
+                    get('letters_min', '')
+                    )
+                letters_max = (
+                    advanced_search_form.cleaned_data.
+                    get('letters_max', '')
+                    )
+                letters = (
+                    advanced_search_form.cleaned_data.
+                    get('letters', '')
+                    )
+                syllables = (
+                    advanced_search_form.cleaned_data.
+                    get('syllables', '')
+                    )
+                syllables_min = (
+                    advanced_search_form.cleaned_data.
+                    get('syllables_min', '')
+                    )
+                syllables_max = (
+                    advanced_search_form.cleaned_data.
+                    get('syllables_max', '')
+                    )
+                frequency_min = (
+                    advanced_search_form.cleaned_data.
+                    get('frequency_min', '')
+                    )
+                frequency_max = (
+                    advanced_search_form.cleaned_data.
+                    get('frequency_max', '')
+                    )
+
+                querystring_dict = {
+                    "letterPattern": letter_pattern,
+                    "lettersmin": letters_min,
+                    "lettersMax": letters_max,
+                    "letters": letters,
+                    "syllables": syllables,
+                    "syllablesMin": syllables_min,
+                    "syllablesMax": syllables_max,
+                    "frequencymin": frequency_min,
+                    "frequencymax": frequency_max,
+                    "limit": (constants.NUM_OF_PRO_RESULTS if
+                              user_group == 'Pro'
+                              else constants.NUM_OF_PLUS_RESULTS
+                              ),
+                }
+
+                # Encode dictionary into a string
+                querystring = '&'.join(
+                    [f"{key}={value}"
+                     for key, value in querystring_dict.items()]
+                    )
+
+                return redirect("words_app:view_words",
+                                querystring=querystring
+                                )
+
+        else:
+            advanced_search_form = AdvancedSearchForm()
+
+    form = BasicSearchForm()
 
     # Get word of the day data
     word_of_today_data = get_word_of_day()
@@ -112,6 +184,7 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
         'results_data': results_data_obj,
         'user_favourite_words': word_of_today_in_users_favourites,
         'user_group': user_group,
+        'advanced_search_form': advanced_search_form,
     }
 
     return render(request, 'words_app/index.html', context=context)
@@ -133,7 +206,6 @@ def favourite_words(
     Returns
     ----------
     HttpResponse | HttpResponseRedirect
-
     """
 
     user = request.user
@@ -175,7 +247,6 @@ def upgrade_account(
     Returns
     ----------
     HttpResponse | HttpResponseRedirect
-
     """
 
     user = request.user
@@ -236,7 +307,7 @@ def view_word(request: HttpRequest,
     Displays a word that the user has requested to view
 
     Takes in a HttpRequest and a word and then renders
-    the games template
+    the view_word template
 
     Parameters
     ----------
@@ -248,10 +319,12 @@ def view_word(request: HttpRequest,
     Returns
     ----------
     HttpResponse | HttpResponseRedirect
-
     """
 
-    get_word = fetch_word(word, False)
+    # Decode the word if it was URL-encoded
+    # See 'view_words' template
+    word = unquote(word)
+    get_word = fetch_word(word=word, get_random_word=False)
     user = request.user
     user_group = user.groups.all()[0].name
     # Check if word is in users favourite words
@@ -283,7 +356,7 @@ def view_word(request: HttpRequest,
             user_word = request.GET['search']
             return redirect('words_app:view_word', word=user_word)
 
-    form = SearchForm()
+    form = BasicSearchForm()
 
     # Process the word data to extract required fields
     (usage_level,
@@ -330,7 +403,6 @@ def random_word(request: HttpRequest
     Returns
     ----------
     HttpResponse | HttpResponseRedirect
-
     """
 
     user = request.user
@@ -436,3 +508,60 @@ def user_profile(request: HttpRequest) -> HttpResponse:
     }
 
     return render(request, 'words_app/user_profile.html', context=context)
+
+
+@login_required
+def view_words(request, querystring: str) -> HttpResponse:
+    """
+    Displays words based on what the user has requested
+
+    Takes in a HttpRequest and renders the view_words template
+
+    Parameters
+    ----------
+    request: HttpRequest
+        Contains metadata about the request
+    querystring: str
+        A querystring dictionary converted into a string. This is the
+        data that was sent to the server
+
+    Returns
+    ----------
+    HttpResponse
+
+    """
+
+    user = request.user
+    user_group = user.groups.all()[0].name
+
+    # Decode the dictionary
+    querystring_dict = dict(
+        map(lambda s: s.split('='), unquote(querystring).split('&'))
+        )
+
+    get_data = fetch_word(get_random_word=False,
+                          querystring=querystring_dict)
+
+    # Check if there is data
+    if not get_data or 'results' not in get_data:
+        num_of_results = None
+        data = None
+    else:
+        num_of_results = get_data['results']['total']
+        results_list = get_data['results']['data']
+        # Set how many words should be in a row
+        chunk_size = 25
+        data = (
+            [results_list[i:i+chunk_size]
+             for i in range(0, len(results_list), chunk_size)]
+            )
+    context = {
+        'num_of_results': num_of_results,
+        'querystring': querystring_dict,
+        'user_group': user_group,
+        'num_of_plus_results': constants.NUM_OF_PLUS_RESULTS,
+        'num_of_pro_results': constants.NUM_OF_PRO_RESULTS,
+        'data': data,
+    }
+
+    return render(request, 'words_app/view_words.html', context=context)

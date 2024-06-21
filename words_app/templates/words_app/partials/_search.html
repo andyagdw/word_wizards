@@ -8,6 +8,7 @@
             {% for field in form %}
             <!-- Display container as relative and display image as position absolute in css -->
                 <div class="form-group position-relative">
+                    <input type="hidden" name="form_type" value="basic_search">
                     <label for="{{ field.id_for_label }}" class="form-label"></label>
                     <img
                     src="{% static 'images/search-icon.png' %}" 
