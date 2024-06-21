@@ -14,13 +14,20 @@ from django.conf import settings
 from django.core.cache import cache
 
 
-def fetch_word(word: str = None, get_random_word: bool = True) -> dict:
+def fetch_word(word: str = None,
+               get_random_word: bool = True,
+               querystring: object = None
+               ) -> dict:
     """
     Fetches a word from WordsAPI and returns the results of this as a
     dictionary
 
     Parameters
     ----------
+    querystring: object
+        The data to be sent to the server. Consists of a set of
+        key-value pairs that provide additional parameters for the
+        request
     word: str
         A word that the user wants to lookup
     get_random_word: bool
@@ -29,7 +36,6 @@ def fetch_word(word: str = None, get_random_word: bool = True) -> dict:
     Returns
     ----------
     Dictionary
-
     """
 
     # The request should wait a maximum of 8 seconds for a response
@@ -46,16 +52,27 @@ def fetch_word(word: str = None, get_random_word: bool = True) -> dict:
         response = requests.get(url,
                                 headers=headers,
                                 params=querystring,
-                                timeout=timeout)
+                                timeout=timeout
+                                )
         if response.status_code == 200:  # Check if call was a success
             return response.json()
         return {}
 
-    else:
+    elif not get_random_word and word:  # Get word requested by the user
         # Add word to end of url
         word_url = f'{url}{word}'
         response = requests.get(word_url,
                                 headers=headers,
+                                timeout=timeout
+                                )
+        if response.status_code == 200:
+            return response.json()
+        return {}
+
+    else:  # Get multiple words
+        response = requests.get(url,
+                                headers=headers,
+                                params=querystring,
                                 timeout=timeout
                                 )
         if response.status_code == 200:
