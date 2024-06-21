@@ -20,4 +20,5 @@ urlpatterns = [
     path('random_word/', views.random_word, name='random_word'),
     path('games/', views.view_games, name='games'),
     path('profile/', views.user_profile, name='user_profile'),
+    path('view_words/<str:querystring>/', views.view_words, name='view_words'),
 ]

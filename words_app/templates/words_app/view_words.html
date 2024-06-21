@@ -1,0 +1,119 @@
+<!-- words_app/templates/words_app/view_words.html
+ Namespace templates: Put templates inside another directory named after
+the application itself -->
+{% extends 'base.html' %}
+
+{% block title %}{{ block.super }} Words{% endblock title%}
+
+{% block content %}
+{% if not data or data_results %}
+    <div class="container" role="region" aria-labelledby="search-words">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="words-no-results-container d-flex align-items-center justify-content-center flex-column">
+                    <h1 id="search-words">No results</h1>
+                    <p class="pt-4">Back to <a href="{% url 'words_app:index' %}">home page</a>?</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="container" role="region" aria-labelledby="search-words">
+        <div class="row">
+            <div class="col-md-12 border mb-5 py-3">
+                <h1 id="search-words">Results</h1>
+                <p class="ps-2">Number of results: {{ num_of_results }}</p>
+                {% if user_group == 'Plus' %}
+                    <p class="ps-2">
+                        Showing first {{ num_of_plus_results }}. Want to see all results? 
+                        <a href="{% url 'words_app:upgrade_account' %}">
+                            Upgrade
+                        </a> to Pro!
+                    </p>
+                {% endif %}
+                {% if user_group == 'Pro' %}
+                    <p class="ps-2">
+                        Showing first {{ num_of_pro_results }}.
+                    </p>
+                {% endif %}
+                <h2 class="mt-5">Your Search:</h2>
+                <ul>
+                    <li>
+                        Letter Pattern: {{ querystring.letterPattern}}
+                    </li>
+                    <!-- Display users input only if they filled out optional fields -->
+                    {% if querystring.lettersmin %}
+                        <li>
+                            Minimum number of letters: {{ querystring.lettersmin }}
+                        </li>
+                    {% endif %}
+                    {% if querystring.lettersMax %}
+                        <li>
+                            Maximum number of letters: {{ querystring.lettersMax }}
+                        </li>
+                    {% endif %}
+                    {% if querystring.letters %}
+                        <li>
+                            The number of letters the word must have: {{ querystring.letters }}
+                        </li>
+                    {% endif %}
+                    {% if querystring.syllables %}
+                        <li>
+                            The number of syllables the word must have: {{ querystring.syllables }}
+                        </li>
+                    {% endif %}
+                    {% if querystring.syllablesMin %}
+                        <li>
+                            The minimum number of syllables the word can have: {{ querystring.syllablesMin }}
+                        </li>
+                    {% endif %}
+                    {% if querystring.syllablesMax %}
+                        <li>
+                            The maximum number of syllables the word can have: {{ querystring.syllablesMax }}
+                        </li>
+                    {% endif %}
+                    {% if querystring.frequencymin %}
+                        <li>
+                            The minimum frequency score of words to return: {{ querystring.frequencymin }}
+                        </li>
+                    {% endif %}
+                    {% if querystring.frequencymax %}
+                        <li>
+                            The maximum frequency score of words to return: {{ querystring.frequencymax }}
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+        <!--  -->
+        <!-- Loop through each list (containing 25 words, if there are enough results) in data -->
+        {% for chunk in data %}
+        <!-- Create a new row when there are four columns -->
+            {% if forloop.counter0|divisibleby:"4" %}
+                <div class="row">
+            {% endif %}
+            <!-- Create columns -->
+                <div class="col-md-3 py-3">
+                    <ul>
+                    {% for word in chunk %}
+                        <li>
+                            <!-- Make sure URL reverse lookup doesn't fail by escaping all characters -->
+                            <!-- Slashes are not allowed based on URL pattern definition -->
+                            {% with encoded_word=word|urlencode:"" %}
+                            <a href="{% url 'words_app:view_word' encoded_word %}">
+                                {{ word|capfirst }}
+                            </a>
+                            {% endwith %}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                </div>
+            <!-- End the row, and create a new row next iteration -->
+            {% if forloop.counter0|add:"1"|divisibleby:"4" %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        <!--  -->
+    </div>
+{% endif %}
+{% endblock content %}
