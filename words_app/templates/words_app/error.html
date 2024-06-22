@@ -27,7 +27,8 @@ the application itself -->
                     <div class="no-api-container d-flex align-items-center justify-content-center flex-column">
                         <h1>An error occured</h1>
                         <p class="fw-bold">{{ error_message }}</p>
-                        <p>Please provide a valid API key to use this service. 
+                        <p>Please provide a valid API key to use this service. Restart the server and try again.</p> 
+                        <p>
                             <a href="{% url 'authenticate:logout' %}">Logout</a>
                         </p>
                     </div>
