@@ -21,16 +21,18 @@ the application itself -->
     </div>
     <div class="row d-flex justify-content-evenly">
     <!-- Display appropriate upgrade account types based on user group -->
-    {% if user_group == 'Starter' %}
-        {% include './partials/_plus.html' %}
-        {% include './partials/_pro.html' %}
-    {% elif user_group == 'Plus' %}
-        {% include './partials/_starter.html' %}
-        {% include './partials/_pro.html' %}
-    {% elif user_group == 'Pro' %}
-        {% include './partials/_starter.html' %}
-        {% include './partials/_plus.html' %}
-    {% endif %}
+    {% with numOfPlusResults=num_of_plus_results numOfProResults=num_of_pro_results %}
+        {% if user_group == 'Starter' %}
+            {% include './partials/_plus.html' %}
+            {% include './partials/_pro.html' %}
+        {% elif user_group == 'Plus' %}
+            {% include './partials/_starter.html' %}
+            {% include './partials/_pro.html' %}
+        {% elif user_group == 'Pro' %}
+            {% include './partials/_starter.html' %}
+            {% include './partials/_plus.html' %}
+        {% endif %}
+    {% endwith %}
     </div>
 </div>
 {% endblock content %}

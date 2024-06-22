@@ -302,6 +302,8 @@ def upgrade_account(
 
     context = {
         'user_group': user_group,
+        'num_of_plus_results': constants.NUM_OF_PLUS_RESULTS,
+        'num_of_pro_results': constants.NUM_OF_PRO_RESULTS,
     }
 
     return render(request,
