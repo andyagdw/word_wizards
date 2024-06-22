@@ -9,6 +9,7 @@ Each field is styled with Bootstrap classes for consistent UI design
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
 
 
 class RegisterForm(forms.Form):
@@ -54,9 +55,14 @@ class RegisterForm(forms.Form):
         # Call 'forms.Form' clean method to retrieve the cleaned data
         cleaned_data = super().clean()
 
-        # Retrieve the password and confirm_password from the data
+        # Retrieve cleaned_data information
+        username = cleaned_data.get("username")
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
+
+        # Check if username already exists. Username must be unique
+        if User.objects.filter(username=username).exists():
+            raise ValidationError("Username already exists")
 
         # Check if password and confirm_password are valid
         if password and confirm_password and password != confirm_password:
