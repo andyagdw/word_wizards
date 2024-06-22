@@ -551,7 +551,7 @@ def view_words(request, querystring: str) -> HttpResponse:
     else:
         num_of_results = get_data['results']['total']
         results_list = get_data['results']['data']
-        # Set how many words should be in a row
+        # Set how many words should be in a column
         chunk_size = 25
         data = (
             [results_list[i:i+chunk_size]
