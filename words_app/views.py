@@ -323,12 +323,14 @@ def view_word(request: HttpRequest,
 
     # Decode the word if it was URL-encoded
     # See 'view_words' template
-    word = unquote(word)
-    get_word = fetch_word(word=word, get_random_word=False)
+    decoded_word = unquote(word)
+    get_word = fetch_word(word=decoded_word, get_random_word=False)
     user = request.user
     user_group = user.groups.all()[0].name
     # Check if word is in users favourite words
-    word_in_user_favourites = user.favourite_words.filter(word=word).exists()
+    word_in_user_favourites = (
+        user.favourite_words.filter(word=decoded_word).exists()
+        )
 
     if request.method == 'POST':
         # Check user action - if they want to add or remove a word
