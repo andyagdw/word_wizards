@@ -9,6 +9,7 @@ and interacts with the WordsAPI and the database as needed
 # words_app/views.py
 
 from urllib.parse import unquote
+import datetime
 from django.conf import settings
 from django.shortcuts import render
 from django.contrib import messages
@@ -516,9 +517,12 @@ def user_profile(request: HttpRequest) -> HttpResponse:
 
     user = request.user
     user_group = user.groups.all()[0].name
+    # Increase the user joined date by one hour to match Uk time
+    date_joined = user.date_joined + datetime.timedelta(hours=1)
 
     context = {
         'user_group': user_group,
+        'date_joined': date_joined,
     }
 
     return render(request, 'words_app/user_profile.html', context=context)
