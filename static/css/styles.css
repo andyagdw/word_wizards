@@ -72,7 +72,8 @@ li.check-tick-li {
     .starter-upgrade-account-container,
     .no-favourite-words-container,
     .games-text-container,
-    .words-no-results-container) {
+    .words-no-results-container,
+    .no-api-container) {
     height: 20em;
 }
 

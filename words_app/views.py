@@ -9,6 +9,7 @@ and interacts with the WordsAPI and the database as needed
 # words_app/views.py
 
 from urllib.parse import unquote
+from django.conf import settings
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
@@ -46,6 +47,15 @@ def index(request: HttpRequest) -> HttpResponse | HttpResponseRedirect:
     ----------
     HttpResponse | HttpResponseRedirect
     """
+
+    # Check if the User has provided an API key
+    api_key = settings.WORDS_API_KEY
+    if not api_key:
+        context = {
+            'error_message': "API key is not provided. Cannot make "
+            " requests to WordsAPI."
+        }
+        return render(request, 'words_app/error.html', context=context)
 
     user = request.user
     user_group = user.groups.all()[0].name
