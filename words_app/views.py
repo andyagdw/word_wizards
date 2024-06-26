@@ -520,6 +520,11 @@ def user_profile(request: HttpRequest) -> HttpResponse:
     # Increase the user joined date by one hour to match Uk time
     date_joined = user.date_joined + datetime.timedelta(hours=1)
 
+    if request.method == 'POST':  # Delete user account
+        if 'delete_account' in request.POST:
+            user.delete()
+            return redirect("authenticate:login")
+
     context = {
         'user_group': user_group,
         'date_joined': date_joined,

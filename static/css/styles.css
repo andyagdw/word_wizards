@@ -164,11 +164,11 @@ li.check-tick-li {
     background: linear-gradient(to top, transparent 95%, var(--blue));
 }
 
-.modal-title::after {
+.modal-title:not(h5.delete_modal_header)::after {
     content: 'Change Account Type';
 }
 
-.modal-body::after {
+.modal-body:not(div.delete_modal_body)::after {
     content: 'Are you sure you would like to change your account type?';
 }
 
