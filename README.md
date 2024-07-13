@@ -8,7 +8,7 @@ explore the word of the day, discover random words, and curate a personalised li
 favourite words. Additionally, users can upgrade their accounts to access enhanced features
 and enjoy a richer experience free of cost ❗.
 
-## Features 💥
+## Features ✨
 
 * **Word of the Day**: <br /> Stay inspired and learn something new every day with the 'Word of the Day'
  feature, providing you with a fresh word and its details daily.
