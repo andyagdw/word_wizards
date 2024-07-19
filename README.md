@@ -43,15 +43,14 @@ Follow these simple steps to get started with Word Wizards:
   left sidebar, then scroll down to "My Subscriptions" and select "WordsAPI" to view your API key.
 * Copy your X-RapidAPI-Key for later use.
 
-2. Ensure you have Python and Pip installed on your local machine. <br />
+2. Ensure you have Python and Pip installed on your local machine: <br />
 3. Clone the repository to your local machine: <br />
    `git clone https://github.com/andyagdw/word_wizards.git`
 4. Navigate to the project directory: <br />
    `cd word_wizards`
 5. Open Visual Studio Code: <br />
    `code .`
-6. Set up a virtual environment in Visual Studio Code terminal. <br />
-   Make sure you are in the project directory.
+6. Set up a virtual environment in Visual Studio Code terminal: <br />
 
    Using venv:
 
@@ -66,7 +65,7 @@ Follow these simple steps to get started with Word Wizards:
    virtualenv venv
    ```
 
-7. Activate the virtual environment.
+7. Activate the virtual environment:
 
    Using venv:
 
@@ -85,7 +84,7 @@ Follow these simple steps to get started with Word Wizards:
 8. Ensure project dependencies are installed: <br />
    ```pip install -r requirements.txt```
 
-9. Create a `.env` file from the example template `.env.example`
+9. Create a `.env` file from the example template `.env.example`:
 
    Windows: <br />
    `copy .env.example .env` <br />
@@ -99,7 +98,7 @@ Follow these simple steps to get started with Word Wizards:
 11. In the project directory, start the server: <br />
    `python manage.py runserver`
 
-12. Click the link that shows in the terminal!
+12. Click the link that shows in the terminal 🚀.
 
 ## Upcoming Features 🎆
 
