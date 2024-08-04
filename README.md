@@ -10,13 +10,13 @@ and enjoy a richer experience free of cost ❗.
 
 ## Features ✨
 
-* **Word of the Day**: <br /> Stay inspired and learn something new every day with the 'Word of the Day'
- feature, providing you with a fresh word and its details daily.
-* **Random Word**: <br /> Discover new words at random and expand your vocabulary with just a click.
-* **Favourites**: <br /> Keep track of the words you love by adding them to your favourites list for easy
- access and review.
-* **Account Upgrades**: <br /> Upgrade your account to unlock 'Plus' or 'Pro' features, enhancing your word
- discovery experience with additional functionalities.
+* **Word of the Day**: <br> Stay inspired and learn something new every day with the 'Word of the Day'
+ feature, providing you with a fresh word and its details daily
+* **Random Word**: <br> Discover new words at random and expand your vocabulary with just a click
+* **Favourites**: <br> Keep track of the words you love by adding them to your favourites list for easy
+ access and review
+* **Account Upgrades**: <br> Upgrade your account to unlock 'Plus' or 'Pro' features, enhancing your word
+ discovery experience with additional functionalities
 
 ## Light and Dark Mode 🌓
 
@@ -35,6 +35,9 @@ and enjoy the interface in any lighting condition 😄.
 
 Follow these simple steps to get started with Word Wizards:
 
+### Prerequisite
+- Ensure that Python and Pip are installed on your machine
+
 1. Create a free account with RapidAPI:
 * Go to the [WordsAPI RapidAPI page](https://rapidapi.com/dpventures/api/wordsapi/pricing).
 * Sign up for a free basic plan, which provides access to 2,500 requests per day.
@@ -43,19 +46,16 @@ Follow these simple steps to get started with Word Wizards:
   left sidebar, then scroll down to "My Subscriptions" and select "WordsAPI" to view your API key.
 * Copy your X-RapidAPI-Key for later use.
 
-2. Ensure you have Python and Pip installed on your local machine: <br />
-3. Clone the repository to your local machine: <br />
+2. Clone the repository to your local machine: <br>
    `git clone https://github.com/andyagdw/word_wizards.git`
-4. Navigate to the project directory: <br />
+3. Navigate to the project directory: <br>
    `cd word_wizards`
-5. Open Visual Studio Code: <br />
-   `code .`
-6. Set up a virtual environment in Visual Studio Code terminal: <br />
+4. Set up a virtual environment: <br>
 
    Using venv:
 
-   `python -m venv venv` <br />
-   For Python 3.3 or newer: <br />
+   `python -m venv venv` <br>
+   For Python 3.3 or newer: <br>
    `python3 -m venv venv`
 
    Using virtualenv:
@@ -65,46 +65,46 @@ Follow these simple steps to get started with Word Wizards:
    virtualenv venv
    ```
 
-7. Activate the virtual environment:
+5. Activate the virtual environment:
 
    Using venv:
 
-   Windows: <br />
-   `venv\Scripts\activate` <br />
-   Unix\Mac: <br />
+   Windows: <br>
+   `venv\Scripts\activate` <br>
+   Unix\Mac: <br>
    `source venv/bin/activate`
 
-   Using virtualenv: <br />
+   Using virtualenv: <br>
 
-   Windows: <br />
-   `venv\Scripts\activate` <br />
-   Unix\Mac: <br />
+   Windows: <br>
+   `venv\Scripts\activate` <br>
+   Unix\Mac: <br>
    `source venv/bin/activate`
 
-8. Ensure project dependencies are installed: <br />
+6. Ensure project dependencies are installed: <br>
    ```pip install -r requirements.txt```
 
-9. Create a `.env` file from the example template `.env.example`:
+7. Create a `.env` file from the example template `.env.example`:
 
-   Windows: <br />
-   `copy .env.example .env` <br />
-   Unix\Mac: <br />
+   Windows: <br>
+   `copy .env.example .env` <br>
+   Unix\Mac: <br>
    `cp .env.example .env`
    
    Then, open the `.env` file and replace `your_api_key_here` with your actual WordsAPI key. For example:
 
    WORDS_API_KEY = 'ABCDE'
 
-11. In the project directory, start the server: <br />
+8. In the project directory, start the server: <br>
    `python manage.py runserver`
 
-12. Click the link that shows in the terminal 🚀.
+9. Click the link that shows in the terminal 🚀.
 
 ## Upcoming Features 🎆
 
-1. **Interactive Games**: <br /> Add a variety of word-related games, including both single-player and
+1. **Interactive Games**: <br> Add a variety of word-related games, including both single-player and
  multiplayer options, to make learning new words fun and engaging 😁.
-2. **Personal Vocabulary Notes**: <br /> Introduce a feature that allows users to add personal notes and insights
+2. **Personal Vocabulary Notes**: <br> Introduce a feature that allows users to add personal notes and insights
  about words, creating a personalised vocabulary journal 📖.
 
 ## Credits
